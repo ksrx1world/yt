@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> 
+    <script type="text/javascript">
+
+        window.onload = function() {
+                loading()
+        };
+
+        function loading(){
+        var x = document.forms["youtube-download"]['url'].value;
+          if (x == "" ) {
+         $("#loading").hide();
+         $("#content").show();       
+       }
+       else{
+        $("#loading").show();
+         $("#content").hide(); 
+       }
+       };
+          </script>
+</head>
+<body>
+ <div class="container">
+    <header class="site-head">
+        <h1 class="h2 mb-4 title">Youtube Downloader</h1>
+        <p>Download any youtube video in multiple formats and quality with fast download</p>
+    </header>
+    <div class="container content-wrap">
+        <div class="row justify-content-center align-items-start">
+            <div class="col">
+                <form class="down-form" name="youtube-download" method="post">
+                    <input type="url" name="url" placeholder="https://www.youtube.com/watch?v=abcabcabc" required class="form-control form-control-lg"/>
+                    {% if msg == 'invalid' %}
+                    <div class="alert alert-danger" role="alert">
+                        Please Enter a valid Youtube Link!
+                      </div><br/>
+                     {%else%}
+                     {{msg}} 
+                    {% endif %}
+                    <button type="submit" class="btn btn-success mt-3" onclick="loading()">Get Link</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading">
+        <img src="../static/images/loader.gif" alt="animated" />
+      </div>
+
+    <div class="row" id="content">
+        <div class="col-md-6">
+            {%if thumbnail%}
+    <hr>
+
+        <img src={{thumbnail}} class="img-fluid img-thumbnail" style="width: 80%">
+    {%endif%}
+    
+        </div>
+        <div class="col-md-6">
+            {%if s720 or s480 or s360 or s240 or s144 %}
+    <hr>
+    <header class="site-down"><h2 class="h2 mb-4 title">Download&nbsp;<span class="h3 mb-4 ">(mp4)</span></h2></header>
+   
+    {%if s720 %}
+            <a class="btn btn-success site1" href={{s720}}>720p</a>
+    {%endif%}
+    {%if s480 %}
+            <a class="btn btn-success site1" href={{s480}}>480p</a>
+    {%endif%}
+    {%if s360 %}
+            <a class="btn btn-success site2" href={{s360}}>360p</a>
+    {%endif%}
+    {%if s240 %}
+            <a class="btn btn-success site2" href={{s240}}>240p</a>
+    {%endif%}
+    {%if s144 %}
+            <a class="btn btn-success site3" href={{s144}}>144p</a>
+    {%endif%}
+    {%if not s1080 %}
+        <br/>
+        <br/>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <strong>Audio issues</strong> with 1080P. 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    {%endif%}
+    {%endif%}
+    
+        </div>
+    </div>
+
+
+ </div> 
+
+</body>
+</html>
+
+

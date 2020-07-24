@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+</head>
+<body>
+    <div>
+        <aside><img src="../static/images/Mirror.png" alt="404 Image" />
+        </aside>
+        <main>
+          <h1>Sorry!</h1>
+          <p>
+           Page doesn't exist <em> Enter Video link here</em>
+          </p>
+          <form class="down-form" name="youtube-download" method="post" action="/">
+            <input type="url" name="url" placeholder="https://www.youtube.com/watch?v=abcabcabc" required class="form-control form-control-lg"/>
+            </br>
+            <button type="submit" class="btn btn-success mt-3">Get video</button>
+        </form>
+        </main>
+      </div>
+</body>
+</html>
